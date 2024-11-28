@@ -6,6 +6,12 @@ import { AppComponent } from './app.component';
 import { StudentComponent } from './student/student.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 //import { ToastrModule } from 'ngx-toastr';
 
 
@@ -20,8 +26,10 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-  
-    //ToastrModule
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    BrowserAnimationsModule,
 
   ],
   providers: [],

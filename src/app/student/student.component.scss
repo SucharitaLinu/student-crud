@@ -1,0 +1,25 @@
+/* Customize PrimeNG table */
+::ng-deep .p-table {
+    width: 100%;
+  }
+  
+  ::ng-deep .p-table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  ::ng-deep .p-table td {
+    text-align: center;
+  }
+  
+
+  /* Add custom spacing for the th tags inside p-table */
+.custom-th {
+    padding: 50px; /* Adds space inside each header cell */
+    margin-right: 50px; /* Adds space between columns */
+  }
+  
+  p-table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }

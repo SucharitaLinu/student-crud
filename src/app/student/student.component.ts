@@ -41,6 +41,7 @@ export class StudentComponent implements OnInit {
   addStudent() {
     const newStudent = this.formValue.value; // Get form data
     this.studentList.push(newStudent); // Add new student to the list
+    console.log(this.studentList);
     this.formValue.reset(); // Reset the form
     this.showadd = false; // Close the modal
   }

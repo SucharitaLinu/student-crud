@@ -93,7 +93,7 @@
 
    
 
-   <!-- p-table>
+   <!-p-table>
             <ng-template pTemplate="caption">
                 <div class="p-grid p-grid p-align-center p-justify-between w-100-p">
                     <span class="font-14">Student details</span>
@@ -182,31 +182,31 @@
             </div>
           </nav>
           
-          <table class="table mt-4">
-            <thead>
+          <p-table [value]="studentList" [paginator]="true" [rows]="5" [responsive]="true" >
+            <ng-template pTemplate="header">
               <tr>
-                <th scope="col">S. Id</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Mobile</th>
-                <th scope="col">City</th>
-                <th scope="col">Action</th>
+                <th scope="col" style="padding: 10px;">S. Id </th>
+                <th scope="col"style="padding: 20px;">Name</th>
+                <th scope="col"style="padding: 20px;">Email</th>
+                <th scope="col"style="padding: 20px;">Mobile</th>
+                <th scope="col"style="padding: 20px;">City</th>
+                <th scope="col"style="padding: 20px;">Action</th>
               </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let student of studentList; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ student.name }}</td>
-                <td>{{ student.email }}</td>
-                <td>{{ student.mobile }}</td>
-                <td>{{ student.city }}</td>
-                <td>
+            </ng-template>
+            <ng-template pTemplate="body" let-student let-i="rowIndex">
+              <tr>
+                <td>{{ i+1 }}</td>
+                <td style="padding: 20px;">{{ student.name }}</td>
+                <td style="padding: 20px;">{{ student.email }}</td>
+                <td style="padding: 20px;">{{ student.mobile }}</td>
+                <td style="padding: 20px;">{{ student.city }}</td>
+                <td >
                   <button class="btn btn-info" (click)="editStudent(i)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>&nbsp;
                   <button class="btn btn-danger" (click)="deleteStudent(i)">Delete</button>
                 </td>
               </tr>
-            </tbody>
-          </table>
+            </ng-template>
+          </p-table>
           
           <!-- Modal for Add/Edit Student -->
           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
