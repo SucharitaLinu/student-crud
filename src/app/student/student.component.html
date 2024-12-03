@@ -177,15 +177,19 @@
               <h2 class="text-light primary py-3">STUDENT TABLE </h2>
               <div class="d-flex">
                 <button class="btn btn-success" (click)="add()" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Student</button>&nbsp;
+                <button class="btn btn-danger" [disabled]="!hasSelectedStudents()" (click)="deleteSelected()">Delete Selected</button>&nbsp;
                 <button class="btn btn-warning  " (click)="logout()">Logout</button>
               </div>
             </div>
           </nav>
           
-          <p-table [value]="studentList" [paginator]="true" [rows]="5" [responsive]="true" >
+          <p-table [value]="studentList" [rows]="5" [responsive]="true" >
             <ng-template pTemplate="header">
               <tr>
-                <th scope="col" style="padding: 10px;">S. Id </th>
+                 <th>
+                  <input type="checkbox" [checked]="allSelected" (change)="toggleSelectAll($event)" />
+                 </th>
+                <th scope="col" style="padding: 10px;">S.Id </th>
                 <th scope="col"style="padding: 20px;">Name</th>
                 <th scope="col"style="padding: 20px;">Email</th>
                 <th scope="col"style="padding: 20px;">Mobile</th>
@@ -195,14 +199,17 @@
             </ng-template>
             <ng-template pTemplate="body" let-student let-i="rowIndex">
               <tr>
+                <td>
+                  <input type="checkbox" [(ngModel)]="student.selected" (change)="updateSelection()" />
+                </td>
                 <td>{{ i+1 }}</td>
                 <td style="padding: 20px;">{{ student.name }}</td>
                 <td style="padding: 20px;">{{ student.email }}</td>
                 <td style="padding: 20px;">{{ student.mobile }}</td>
                 <td style="padding: 20px;">{{ student.city }}</td>
                 <td >
-                  <button class="btn btn-info" (click)="editStudent(i)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>&nbsp;
-                  <button class="btn btn-danger" (click)="deleteStudent(i)">Delete</button>
+                  <button class="btn btn-info" (click)="editStudent(i)" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-toggle="tooltip" title="Edit this student">Edit</button>&nbsp;
+                  <button class="btn btn-danger" (click)="deleteStudent(i)"  data-bs-toggle="tooltip" title="Delete this student">Delete</button>
                 </td>
               </tr>
             </ng-template>

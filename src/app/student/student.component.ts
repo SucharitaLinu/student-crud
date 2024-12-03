@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 //import { ToastrService } from 'ngx-toastr';
+//declare var bootstrap: any; 
 
 @Component({
   selector: 'app-student',
@@ -15,6 +16,7 @@ export class StudentComponent implements OnInit {
   formValue: FormGroup;
   studentList: any[] = []; // Dynamic array to hold student data
   currentEditIndex: number | null = null; // Index of student being edited
+  allSelected: boolean = false;
 
   constructor(private formBuilder: FormBuilder , private router: Router ) {}   //private toastr: ToastrService
   logout() {
@@ -25,9 +27,15 @@ export class StudentComponent implements OnInit {
     this.formValue = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
       city: ['', Validators.required],
     });
+    // // Initialize Bootstrap tooltips
+    // const tooltipElements = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    // tooltipElements.forEach((element: any) => {
+    //   new bootstrap.Tooltip(element);
+    // });
+  
   }
 
   add() {
@@ -60,12 +68,35 @@ export class StudentComponent implements OnInit {
       this.studentList[this.currentEditIndex] = this.formValue.value; // Update the student
       this.currentEditIndex = null;
     }
+    if(confirm('Are you sure you want to  update ?')) {
     this.formValue.reset(); // Reset the form
     this.showupdate = false; // Close the modal
+    }
   }
 
   deleteStudent(index: number) {
+   if(confirm('Are you sure you want to delete ?')) {
     this.studentList.splice(index, 1); // Remove the student from the list
+   }
+  }
+  toggleSelectAll(event: any) {
+    this.allSelected = event.target.checked;
+    this.studentList.forEach((student) => (student.selected = this.allSelected));
+  }
+
+  updateSelection() {
+    this.allSelected = this.studentList.every((student) => student.selected);
+  }
+
+  hasSelectedStudents(): boolean {
+    return this.studentList.some((student) => student.selected);
+  }
+
+  deleteSelected() {
+    if (confirm('Are you sure you want to delete the selected students?')) {
+      this.studentList = this.studentList.filter((student) => !student.selected);
+      this.allSelected = false; // Reset "Select All" checkbox
+    }
   }
 
   
